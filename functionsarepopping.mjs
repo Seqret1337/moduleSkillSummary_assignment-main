@@ -20,7 +20,11 @@ function lengthInInchToMm(length) {
 }
 
 function squareRootOfNumber(number) {
-    
+    if (typeof number !== "number" || number < 0) {
+        return NaN
+    }
+    let squareRoot = number ** 0.5;
+    return squareRoot
 }
 
 
@@ -60,4 +64,19 @@ lengthTests.isNotANumber(lengthInInchToMm(undefined), "Should return NaN for und
 
 lengthTests.dosNotThrowError(() => lengthInInchToMm(-1), "Should not throw error for negative input");
 lengthTests.dosNotThrowError(() => lengthInInchToMm("test"), "Should not throw error for invalid input");
+
+const squareRootTests = test("Tests squareRootOfNumber");
+
+squareRootTests.isEqual(squareRootOfNumber(16), 4, "The squareroot of 16 should be 4");
+squareRootTests.isEqual(squareRootOfNumber(0), 0, "The squareroot of 0 should be 0");
+squareRootTests.isEqual(squareRootOfNumber(2), Math.sqrt(2), "The squareroot of 2 should match javascripts in-built function Math.sqrt(2)");
+
+// Invalid inputs
+squareRootTests.isNotANumber(squareRootOfNumber(-5), "Should return NaN for negative number");
+squareRootTests.isNotANumber(squareRootOfNumber("5"), "Should return NaN for string input");
+squareRootTests.isNotANumber(squareRootOfNumber(null), "Should return NaN for null input");
+squareRootTests.isNotANumber(squareRootOfNumber(undefined), "Should return NaN for undefined input");
+
+squareRootTests.dosNotThrowError(() => squareRootOfNumber(-1), "Should not throw error for negative input");
+squareRootTests.dosNotThrowError(() => squareRootOfNumber("test"), "Should not throw error for invalid input");
 //#endregion
