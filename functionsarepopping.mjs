@@ -12,6 +12,9 @@ function squareOfNumber(number) {
 }
 
 function lengthInInchToMm(length) {
+    if (typeof length !== "number" || length < 0) {
+        return NaN;
+    }
     let mm = length * 25.4;
     return mm;
 }
@@ -41,6 +44,20 @@ squareTests.isNotANumber(squareOfNumber(null), "Should return NaN for null input
 squareTests.isNotANumber(squareOfNumber(undefined), "Should return NaN for undefined input");
 
 squareTests.dosNotThrowError(() => squareOfNumber("test"), "Should not throw error for invalid input");
-squareTests.dosNotThrowError(() => squareOfNumber("test"), "Should not throw error for null");
+squareTests.dosNotThrowError(() => squareOfNumber(null), "Should not throw error for null");
 
+const lengthTests = test("Tests lengthInInchToMm");
+
+lengthTests.isEqual(lengthInInchToMm(1), 25.4, "1 inch should be 25.4 mm");
+lengthTests.isEqual(lengthInInchToMm(0), 0, "0 inches should be 0 mm");
+lengthTests.isEqual(lengthInInchToMm(0.5), 12.7, "0.5 inches should be 12.7 mm");
+
+// Invalid inputs
+lengthTests.isNotANumber(lengthInInchToMm(-5), "Should return NaN for negative length");
+lengthTests.isNotANumber(lengthInInchToMm("5"), "Should return NaN for string input");
+lengthTests.isNotANumber(lengthInInchToMm(null), "Should return NaN for null input");
+lengthTests.isNotANumber(lengthInInchToMm(undefined), "Should return NaN for undefined input");
+
+lengthTests.dosNotThrowError(() => lengthInInchToMm(-1), "Should not throw error for negative input");
+lengthTests.dosNotThrowError(() => lengthInInchToMm("test"), "Should not throw error for invalid input");
 //#endregion
