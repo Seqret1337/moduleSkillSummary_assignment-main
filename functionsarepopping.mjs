@@ -43,6 +43,14 @@ function areaOfCircle(radius) {
     return circle;
 }
 
+function greeting(name) {
+    if (typeof name !== "string" || name.trim() === "") {
+        return "Hello there!";
+    }
+    let greet = "Hello " + name.trim();
+    return greet;
+}
+
 //#endregion
 
 
@@ -124,5 +132,22 @@ circleTests.isNotANumber(areaOfCircle(undefined), "Should return NaN for undefin
 
 circleTests.dosNotThrowError(() => areaOfCircle(-1), "Should not throw error for negative input");
 circleTests.dosNotThrowError(() => areaOfCircle("test"), "Should not throw error for invalid input");
+
+const greetingTests = test("Tests greetingTests");
+
+greetingTests.isEqual(greeting("Alexander"), "Hello Alexander", "Greeting Alexander should return Hello Alexander");
+greetingTests.isEqual(greeting("Per"), "Hello Per", "Greeting Per should return Hello Per");
+greetingTests.isEqual(greeting(" James "), "Hello James", "Greeting  James  should return Hello James");
+
+// Invalid inputs
+greetingTests.isEqual(greeting(""), "Hello there!", "empty string should return Hello There!");
+greetingTests.isEqual(greeting("  "), "Hello there!", "white space should return Hello There!");
+greetingTests.isEqual(greeting(null), "Hello there!", "null should return Hello There!");
+greetingTests.isEqual(greeting(undefined), "Hello there!", "undefined should return Hello There!");
+greetingTests.isEqual(greeting(123), "Hello there!", "integers should return Hello There!");
+
+greetingTests.dosNotThrowError(() => greeting(null), "Should not throw error for null");
+greetingTests.dosNotThrowError(() => greeting(undefined), "Should not throw error for undefined");
+greetingTests.dosNotThrowError(() => greeting(123), "Should not throw error for integers");
 
 //#endregion
