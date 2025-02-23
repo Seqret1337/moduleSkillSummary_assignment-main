@@ -27,6 +27,14 @@ function squareRootOfNumber(number) {
     return squareRoot
 }
 
+function cubeOfNumber(number) {
+    if (typeof number !== "number") {
+        return NaN
+    }
+    let cube = number ** 3;
+    return cube
+}
+
 
 //#endregion
 
@@ -79,4 +87,21 @@ squareRootTests.isNotANumber(squareRootOfNumber(undefined), "Should return NaN f
 
 squareRootTests.dosNotThrowError(() => squareRootOfNumber(-1), "Should not throw error for negative input");
 squareRootTests.dosNotThrowError(() => squareRootOfNumber("test"), "Should not throw error for invalid input");
+
+const cubeTests = test("Tests cubeTests");
+
+cubeTests.isEqual(cubeOfNumber(16), 4096, "The cube of 16 should be 4096");
+cubeTests.isEqual(cubeOfNumber(-2), -8, "The cube of -2 should be -8");
+cubeTests.isEqual(cubeOfNumber(0), 0, "The cube of 0 should be 0");
+cubeTests.isEqual(cubeOfNumber(1), 1, "The cube of 1 should be 1");
+
+// Invalid inputs
+cubeTests.isNotANumber(cubeOfNumber("5"), "Should return NaN for string input");
+cubeTests.isNotANumber(cubeOfNumber(null), "Should return NaN for null input");
+cubeTests.isNotANumber(cubeOfNumber(undefined), "Should return NaN for undefined input");
+
+cubeTests.dosNotThrowError(() => cubeOfNumber(null), "Should not throw error for null");
+cubeTests.dosNotThrowError(() => cubeOfNumber("test"), "Should not throw error for invalid input");
+
+
 //#endregion
