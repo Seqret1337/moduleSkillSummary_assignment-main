@@ -35,6 +35,13 @@ function cubeOfNumber(number) {
     return cube
 }
 
+function areaOfCircle(radius) {
+    if (typeof radius !== "number" || radius < 0) {
+        return NaN;
+    }
+    let circle = 3.14 * (radius ** 2);
+    return circle;
+}
 
 //#endregion
 
@@ -103,5 +110,19 @@ cubeTests.isNotANumber(cubeOfNumber(undefined), "Should return NaN for undefined
 cubeTests.dosNotThrowError(() => cubeOfNumber(null), "Should not throw error for null");
 cubeTests.dosNotThrowError(() => cubeOfNumber("test"), "Should not throw error for invalid input");
 
+const circleTests = test("Tests circleTests");
+
+circleTests.isEqual(areaOfCircle(1), 3.14, "area of circle with radius 1 should be 3.14");
+circleTests.isEqual(areaOfCircle(0), 0, "area of circle with radius 0 should be 0");
+circleTests.isEqual(areaOfCircle(2), 12.56, "are of circle with radius 2 should be 12.56");
+
+// Invalid inputs
+circleTests.isNotANumber(areaOfCircle(-5), "Should return NaN for negative radius");
+circleTests.isNotANumber(areaOfCircle("5"), "Should return NaN for string input");
+circleTests.isNotANumber(areaOfCircle(null), "Should return NaN for null input");
+circleTests.isNotANumber(areaOfCircle(undefined), "Should return NaN for undefined input");
+
+circleTests.dosNotThrowError(() => areaOfCircle(-1), "Should not throw error for negative input");
+circleTests.dosNotThrowError(() => areaOfCircle("test"), "Should not throw error for invalid input");
 
 //#endregion
