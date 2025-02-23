@@ -75,3 +75,4 @@ const nodeCount = countNodes(nodesJson);
 nodesTest.isEqual(sum, 20903, "Total sum should be 20903");
 nodesTest.isEqual(deepestLevel, 18, "Deepest level should be 18");
 nodesTest.isEqual(nodeCount, 40 ,"Node count should be 40");
+//#endregion
